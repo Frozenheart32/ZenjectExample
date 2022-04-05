@@ -1,17 +1,27 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace DefaultNamespace
+public class PlayerController : MonoBehaviour
 {
-    public class PlayerController : MonoBehaviour
-    {
-        [Inject] private IPlayerInput _playerInput;
-        [Inject] private GameManager _gameManager;
+    private IPlayerInput _playerInput;
+    private GameManager _gameManager;
+    private IPowerUpManager _powerUpManager;
 
-        private void Start()
+    [Inject]
+    private void Construct(IPlayerInput playerInput, GameManager gameManager, IPowerUpManager powerUpManager)
+    {
+        _playerInput = playerInput;
+        _gameManager = gameManager;
+        _powerUpManager = powerUpManager;
+    }
+
+    private void Start()
+    {
+        _playerInput.GetInput();
+        _gameManager.Hello();
+        if (_powerUpManager != null)
         {
-            _playerInput.GetInput();
-            _gameManager.Hello();
+            Debug.Log("Player: У меня есть PowerUpManager");
         }
     }
 }

@@ -1,4 +1,3 @@
-using DefaultNamespace;
 using UnityEngine;
 using Zenject;
 
@@ -10,7 +9,7 @@ public class HPBar : MonoBehaviour
     //Своего рода аналог конструктора для монобехов.
     //Требование: все входные данные должны быть зарегистрированы в каком-нить MonoInstaller
     [Inject]
-    private void Constructor(PlayerController playerController)
+    private void Construct(PlayerController playerController)
     {
         _playerController = playerController;
     }
